@@ -1,0 +1,9 @@
+
+
+
+
+Suggested Tech Stack for Projects 
+Backend: Node.js, 
+Database: MongoDB 
+Frontend: React
+Key Features: Role-Based Access Control (RBAC) (Admin, HR, Employee)
