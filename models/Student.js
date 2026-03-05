@@ -37,7 +37,7 @@ const studentSchema = new Schema({
         type: String,
         required: [true, 'Department is required'],
         enum: {
-            values: ['BBA', 'MBA', 'CSE', 'EEE', 'LAW', 'ARCHITECT', 'Phd'],
+            values: ['BBA', 'MBA', 'CSE', 'EEE', 'LAW', 'ARCHITECT', 'PHD'],
             message: '{VALUE} is not a valid Department'
         }
     },
