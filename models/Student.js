@@ -24,7 +24,7 @@ const studentSchema = new Schema({
         minlength: [6, 'Password must be at least 6 characters'],
         maxlength: [15, 'Password must be maximum 15 characters'],
         match: [/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/, 'Password must have uppercase, lowercase and a number'],
-        select: false  // never return password in queries - frontend e ante parbe na- .select('+password') diye jorr kore ante hobe...
+        select: false  // never return password in queries 
 
     },
     age: {
@@ -87,24 +87,23 @@ const studentSchema = new Schema({
 
 }, { timestamps: true });
 
-// ─── Pre-save: hash password before saving ──────────'Arrow fuction deya jabe na'──────────────
+// ─── Pre-save: hash password before saving ───────'Arrow function deya jabe na'────────
 // password k protect kore with bcrypt kore...
-studentSchema.pre('save', async function (next) {
-    if (!this.isModified('password'))
-        return next();
+
+studentSchema.pre('save', async function () {
+    if (!this.isModified('password')) return ;
 
     try {
-        const salt = await bcrypt.genSalt(10); // random salt korse
-        this.password = await bcrypt.hash(this.password, salt); // password encrypt korche
-
-        next();
-
+        const salt = await bcrypt.genSalt(10);
+        this.password = await bcrypt.hash(this.password, salt);
+        
     } catch (error) {
-        next(error);
+        console.log(error);
+        
     }
 });
 
-// ─── Method: compare password at login ────────────'Arrow fuction deya jabe na'─────────
+// ─── Method: compare password at login ────────'Arrow function deya jabe na'─────────
 studentSchema.methods.matchPassword = async function (enteredPassword) {
     return await bcrypt.compare(enteredPassword, this.password);
 };
